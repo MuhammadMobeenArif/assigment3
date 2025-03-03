@@ -27,15 +27,15 @@
     }
   };
   
-  // Take product ID as input
+  
   var productId = prompt("Enter product ID:");
   
-  // Get the product object based on the ID
+  
   var product = products[productId];
   
-  // Output the product object or an error message if not found
+ 
   if (product) {
-    console.log(product, null, 2);  // Format and print the product
+    console.log(product, null, 2); 
   } else {
     console.log("Product not found.");
   }
@@ -64,15 +64,14 @@ var products = {
     }
 };
 
-// Loop through the products object and print each title
 for (var productId in products) {
     if (products.hasOwnProperty(productId)) {
         console.log(products[productId].title);
     }
 }
 
-//3. Find Available Colors of a Product
-// Sample data representing product information
+//3. Find Available Colors of a Products
+
 var products = {
     102: {
       id: 102,
@@ -94,17 +93,17 @@ var products = {
     }
   };
   
-  // Take product ID as input (simulated by a prompt in a browser environment)
+  
   var productId = prompt("Enter product ID:");
   
-  // Get the product object based on the ID
+  
   var product = products[productId];
   
-  // Output the available colors or an error message if not found
+
   if (product) {
-    // Extract and print all unique colors from the variations
+
     var colors = product.variations.map(variation => variation.color);
-    var uniqueColors = [...new Set(colors)]; // Remove duplicates
+    var uniqueColors = [...new Set(colors)];
   
     uniqueColors.forEach(color => console.log(color));
   } else {
@@ -112,7 +111,7 @@ var products = {
   }
 
  // 4. Get Total Quantity of a Product
- // Sample data representing product information
+
 var products = {
     102: {
       id: 102,
@@ -134,13 +133,13 @@ var products = {
     }
   };
   
-  // Take product ID as input (simulated by a prompt in a browser environment)
+ 
   var productId = prompt("Enter product ID:");
   
-  // Get the product object based on the ID
+ 
   var product = products[productId];
   
-  // Calculate and output the total quantity of all variations or an error message if not found
+  
   if (product) {
     const totalQuantity = product.variations.reduce((total, variation) => total + variation.quantity, 0);
     console.log(`Total Quantity: ${totalQuantity}`);
@@ -149,7 +148,7 @@ var products = {
   }
 
   //5. Filter Products with Low Stock
-  // Sample data representing product information
+
 var products = {
     102: {
       id: 102,
@@ -195,19 +194,19 @@ var products = {
     }
   };
   
-  // Iterate over the products and check for variations with quantity < 2
+
   for (let productId in products) {
     const product = products[productId];
     const hasLowQuantityVariation = product.variations.some(variation => variation.quantity < 2);
   
-    // If at least one variation has a quantity less than 2, print the product title
+  
     if (hasLowQuantityVariation) {
       console.log(product.title);
     }
   }
 
   // 6. Find the Highest Rated Product
- // Sample data representing product information
+
 var products = {
     102: {
       id: 102,
@@ -247,34 +246,32 @@ var products = {
     }
   };
   
-  // Initialize variables to track the highest rated product
-  var highestRatedProduct = null;
-  var highestRating = 0;
+
+
   
-  // Loop through each product to calculate the average rating and find the highest rated product
+
   for (var productId in products) {
     const product = products[productId];
   
-    // Calculate the total rating
+ 
     var totalRating = 0;
     var totalReviews = product.reviews.length;
   
-    // Sum the ratings of all reviews
+  
     for (var i = 0; i < totalReviews; i++) {
       totalRating += product.reviews[i].rating;
     }
   
-    // Calculate the average rating for the current product
     const averageRating = totalRating / totalReviews;
   
-    // Compare with the highest rating found so far
+   
     if (averageRating > highestRating) {
       highestRatedProduct = product;
       highestRating = averageRating;
     }
   }
   
-  // Output the highest rated product
+  
   if (highestRatedProduct) {
     console.log(`Highest Rated Product: ${highestRatedProduct.title}`);
   } else {
@@ -282,7 +279,7 @@ var products = {
   }
 
   // 7. Filter Active Reviews for a Product
-  // Sample data representing product information
+  
 var products = {
     102: {
       id: 102,
@@ -312,12 +309,12 @@ var products = {
     }
   };
   
-  // Iterate through each product and filter approved reviews
+ 
   for (var productId in products) {
     const product = products[productId];
     const approvedReviews = product.reviews.filter(review => review.status === true);
   
-    // Output the approved reviews in the desired format
+ 
     approvedReviews.forEach(review => {
       console.log(JSON.stringify({
         user: review.user,
@@ -328,7 +325,7 @@ var products = {
   }
 
   // 8. Find the Most Expensive Variation of Each Product
-  // Sample data representing product information
+ 
 var products = {
     101: {
       id: 101,
@@ -360,7 +357,7 @@ var products = {
     }
   };
   
-  // Iterate through each product and find the most expensive variation
+
   for (var productId in products) {
     const product = products[productId];
   
@@ -369,12 +366,12 @@ var products = {
       return variation.price > expensive.price ? variation : expensive;
     });
   
-    // Output the product and the most expensive variation
+
     console.log(`Product ${product.id} = ${product.title} - ${mostExpensiveVariation.color} (${mostExpensiveVariation.price})`);
   }
 
   //9. Calculate Total Stock Value
-  // Sample data representing product information
+
 var products = {
     101: {
       id: 101,
@@ -406,13 +403,13 @@ var products = {
     }
   };
   
-  // Calculate total stock value
+ 
   var totalStockValue = 0;
   
   for (var productId in products) {
     const product = products[productId];
     
-    // Sum the value of each variation (price * quantity)
+  
     product.variations.forEach(variation => {
       totalStockValue += variation.price * variation.quantity;
     });
