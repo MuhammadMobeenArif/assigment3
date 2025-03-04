@@ -141,7 +141,7 @@ var products = {
   
   
   if (product) {
-    const totalQuantity = product.variations.reduce((total, variation) => total + variation.quantity, 0);
+    var totalQuantity = product.variations.reduce((total, variation) => total + variation.quantity, 0);
     console.log(`Total Quantity: ${totalQuantity}`);
   } else {
     console.log("Product not found.");
@@ -195,9 +195,9 @@ var products = {
   };
   
 
-  for (let productId in products) {
-    const product = products[productId];
-    const hasLowQuantityVariation = product.variations.some(variation => variation.quantity < 2);
+  for (var productId in products) {
+    var product = products[productId];
+    var hasLowQuantityVariation = product.variations.some(variation => variation.quantity < 2);
   
   
     if (hasLowQuantityVariation) {
@@ -251,7 +251,7 @@ var products = {
   
 
   for (var productId in products) {
-    const product = products[productId];
+    var product = products[productId];
   
  
     var totalRating = 0;
@@ -262,7 +262,7 @@ var products = {
       totalRating += product.reviews[i].rating;
     }
   
-    const averageRating = totalRating / totalReviews;
+    var averageRating = totalRating / totalReviews;
   
    
     if (averageRating > highestRating) {
@@ -311,8 +311,8 @@ var products = {
   
  
   for (var productId in products) {
-    const product = products[productId];
-    const approvedReviews = product.reviews.filter(review => review.status === true);
+    var product = products[productId];
+    var approvedReviews = product.reviews.filter(review => review.status === true);
   
  
     approvedReviews.forEach(review => {
@@ -359,7 +359,7 @@ var products = {
   
 
   for (var productId in products) {
-    const product = products[productId];
+    var product = products[productId];
   
     // Find the most expensive variation
     var mostExpensiveVariation = product.variations.reduce((expensive, variation) => {
@@ -407,7 +407,7 @@ var products = {
   var totalStockValue = 0;
   
   for (var productId in products) {
-    const product = products[productId];
+    var product = products[productId];
     
   
     product.variations.forEach(variation => {
