@@ -1,420 +1,490 @@
-//1. Find a Product by ID
 
- var products = {
-    102: {
+  // 1. Find a Product by ID
+const productDB = {
+  101: {
+      id: 101,
+      title: "Laptop",
+      variations: [
+          { color: "Black", size: "15 inch" },
+          { color: "Silver", size: "14 inch" }
+      ],
+      reviews: [
+          { user: "Alice", rating: 4, comment: "Great laptop!" },
+          { user: "Bob", rating: 5, comment: "Absolutely love it!" }
+      ]
+  },
+  102: {
       id: 102,
       title: "Mobile",
       variations: [
-        { color: "black", size: "64GB" },
-        { color: "blue", size: "128GB" }
+          { color: "Red", size: "6 inch" },
+          { color: "Blue", size: "5.5 inch" }
       ],
       reviews: [
-        { user: "Alice", rating: 5, comment: "Great product!" },
-        { user: "Bob", rating: 4, comment: "Good value for money." }
+          { user: "Charlie", rating: 3, comment: "It's okay, could be better." },
+          { user: "David", rating: 4, comment: "Good value for money." }
       ]
-    },
-    103: {
+  },
+  103: {
       id: 103,
-      title: "Laptop",
+      title: "Tablet",
       variations: [
-        { color: "gray", size: "15 inch" },
-        { color: "black", size: "13 inch" }
-      ],
+          { color: "White", size: "10 inch"},
+          { color: "Black", size: "9.7 inch" }
+ ],
       reviews: [
-        { user: "Charlie", rating: 4, comment: "Decent laptop." },
-        { user: "David", rating: 5, comment: "Amazing performance!" }
+          { user: "Eva", rating: 5, comment: "Perfect tablet for work and play." }
       ]
-    }
-  };
-  
-  
-  var productId = prompt("Enter product ID:");
-  
-  
-  var product = products[productId];
-  
- 
-  if (product) {
-    console.log(product, null, 2); 
-  } else {
-    console.log("Product not found.");
   }
-  
-
-//2. List All Product Titles
-
-var products = {
-    101: {
-        id: 101,
-        title: "Sony LED 40 inch",
-        variations: ["Black", "White", "Silver"],
-        reviews: ["Great picture quality", "Affordable", "Good sound"]
-    },
-    102: {
-        id: 102,
-        title: "Mobile",
-        variations: ["64GB Storage", "128GB Storage", "6GB RAM"],
-        reviews: ["Nice camera", "Battery lasts long", "Very smooth performance"]
-    },
-    103: {
-        id: 103,
-        title: "Bike",
-        variations: ["Red", "Blue", "Black"],
-        reviews: ["Good for commuting", "Comfortable", "Affordable"]
-    }
 };
 
-for (var productId in products) {
-    if (products.hasOwnProperty(productId)) {
-        console.log(products[productId].title);
-    }
+
+function getProductById(productId) {
+  return productDB[productId] ||"Tablet or Mobile not found.";
 }
 
-//3. Find Available Colors of a Products
+const productId = parseInt(prompt("Enter product ID: "));
+const prodcutDB= getProductById(productDB);
+if (productId!== "Product not found.") {
+  console.log(productDB, null, 2);
+} else {
+  console.log(product);
+}
 
-var products = {
-    102: {
-      id: 102,
-      title: "Mobile",
-      variations: [
-        { color: "black", size: "64GB" },
-        { color: "blue", size: "128GB" },
-        { color: "red", size: "256GB" }
-      ]
-    },
-    103: {
-      id: 103,
-      title: "Laptop",
-      variations: [
-        { color: "gray", size: "15 inch" },
-        { color: "black", size: "13 inch" },
-        { color: "silver", size: "13 inch" }
-      ]
-    }
-  };
-  
-  
-  var productId = prompt("Enter product ID:");
-  
-  
-  var product = products[productId];
-  
+// 2. List All Product Titles
 
-  if (product) {
-
-    var colors = product.variations.map(variation => variation.color);
-    var uniqueColors = [...new Set(colors)];
-  
-    uniqueColors.forEach(color => console.log(color));
-  } else {
-    console.log("Product not found.");
-  }
-
- // 4. Get Total Quantity of a Product
-
-var products = {
-    102: {
-      id: 102,
-      title: "Mobile",
-      variations: [
-        { color: "black", size: "64GB", quantity: 5 },
-        { color: "blue", size: "128GB", quantity: 3 },
-        { color: "red", size: "256GB", quantity: 6 }
-      ]
-    },
-    103: {
-      id: 103,
-      title: "Laptop",
-      variations: [
-        { color: "gray", size: "15 inch", quantity: 4 },
-        { color: "black", size: "13 inch", quantity: 5 },
-        { color: "silver", size: "13 inch", quantity: 3 }
-      ]
-    }
-  };
-  
- 
-  var productId = prompt("Enter product ID:");
-  
- 
-  var product = products[productId];
-  
-  
-  if (product) {
-    var totalQuantity = product.variations.reduce((total, variation) => total + variation.quantity, 0);
-    console.log(`Total Quantity: ${totalQuantity}`);
-  } else {
-    console.log("Product not found.");
-  }
-
-  //5. Filter Products with Low Stock
-
-var products = {
-    102: {
-      id: 102,
-      title: "Mobile",
-      variations: [
-        { color: "black", size: "64GB", quantity: 5 },
-        { color: "blue", size: "128GB", quantity: 3 },
-        { color: "red", size: "256GB", quantity: 6 }
-      ]
-    },
-    103: {
-      id: 103,
-      title: "Laptop",
-      variations: [
-        { color: "gray", size: "15 inch", quantity: 1 },
-        { color: "black", size: "13 inch", quantity: 5 },
-        { color: "silver", size: "13 inch", quantity: 3 }
-      ]
-    },
-    104: {
-      id: 104,
+const productsDB = {
+  101: {
+      id: 101,
       title: "Sony LED 40 inch",
       variations: [
-        { color: "black", size: "40 inch", quantity: 0 },
-        { color: "white", size: "40 inch", quantity: 10 }
+          { color: "Black", size: "40 inch" },
+          { color: "Silver", size: "42 inch" }
+      ],
+      reviews: [
+          { user: "Alice", rating: 4, comment: "Great TV!" }
       ]
-    },
-    105: {
-      id: 105,
-      title: "Bike",
-      variations: [
-        { color: "red", size: "medium", quantity: 1 },
-        { color: "blue", size: "large", quantity: 4 }
-      ]
-    },
-    106: {
-      id: 106,
-      title: "Washing Machine",
-      variations: [
-        { color: "white", size: "7kg", quantity: 3 },
-        { color: "gray", size: "8kg", quantity: 2 }
-      ]
-    }
-  };
-  
-
-  for (var productId in products) {
-    var product = products[productId];
-    var hasLowQuantityVariation = product.variations.some(variation => variation.quantity < 2);
-  
-  
-    if (hasLowQuantityVariation) {
-      console.log(product.title);
-    }
-  }
-
-  // 6. Find the Highest Rated Product
-
-var products = {
-    102: {
+  },
+  102: {
       id: 102,
       title: "Mobile",
       variations: [
-        { color: "black", size: "64GB", quantity: 5 },
-        { color: "blue", size: "128GB", quantity: 3 }
+          { color: "Red", size: "6 inch" },
+          { color: "Blue", size: "5.5 inch" }
       ],
       reviews: [
-        { user: "Alice", rating: 5, comment: "Great product!" },
-        { user: "Bob", rating: 4, comment: "Good value for money." }
+          { user: "Charlie", rating: 3, comment: "It's okay, could be better." }
       ]
-    },
-    103: {
+  },
+  103: {
       id: 103,
-      title: "Laptop",
+      title: "Bike",
       variations: [
-        { color: "gray", size: "15 inch", quantity: 4 },
-        { color: "black", size: "13 inch", quantity: 5 }
+          { color: "Black", size: "Medium" },
+          { color: "Red", size: "Large" }
       ],
       reviews: [
-        { user: "Charlie", rating: 3, comment: "Decent laptop." },
-        { user: "David", rating: 5, comment: "Amazing performance!" }
+          { user: "Eva", rating: 5, comment: "Great bike for mountain trails." }
       ]
-    },
-    104: {
-      id: 104,
-      title: "Washing Machine",
-      variations: [
-        { color: "white", size: "7kg", quantity: 3 },
-        { color: "gray", size: "8kg", quantity: 2 }
-      ],
-      reviews: [
-        { user: "Eva", rating: 2, comment: "Not good at all." },
-        { user: "Frank", rating: 3, comment: "Works fine." }
-      ]
-    }
-  };
-  
-
-
-  
-
-  for (var productId in products) {
-    var product = products[productId];
-  
- 
-    var totalRating = 0;
-    var totalReviews = product.reviews.length;
-  
-  
-    for (var i = 0; i < totalReviews; i++) {
-      totalRating += product.reviews[i].rating;
-    }
-  
-    var averageRating = totalRating / totalReviews;
-  
-   
-    if (averageRating > highestRating) {
-      highestRatedProduct = product;
-      highestRating = averageRating;
-    }
   }
+};
+
+function printProductTitles() {
+  for (const productId in productId) {
+      if (productsDB.hasOwnProperty(productId)) {
+          console.log(productsDB[productId].title);
+      }
+  }
+}
+//3. Find Available Colors of a Product
+const producDB = {
+  101: {
+      id: 101,
+      title: "Sony LED 40 inch",
+      variations: [
+          { color: "Black", size: "40 inch" },
+          { color: "Silver", size: "42 inch" }
+      ],
+      reviews: [
+          { user: "Alice", rating: 4, comment: "Great TV!" }
+      ]
+  },
+  102: {
+      id: 102,
+      title: "Mobile",
+      variations: [
+          { color: "Red", size: "6 inch" },
+          { color: "Blue", size: "5.5 inch" }
+      ],
+      reviews: [
+          { user: "Charlie", rating: 3, comment: "It's okay, could be better." }
+      ]
+  },
+  103: {
+      id: 103,
+      title: "Bike",
+      variations: [
+          { color: "Black", size: "Medium" },
+          { color: "Red", size: "Large" }
+      ],
+      reviews: [
+          { user: "Eva", rating: 5, comment: "Great bike for mountain trails." }
+      ]
+  }
+};
+
+
+function printProductColors(productId) {
+  const product = productsDB[productId];
   
+  if (product) {
+      const colors = product.variations.map(variation => variation.color);
+      colors.forEach(color => console.log(color.toLowerCase()));
+  } else {
+      console.log("Product not found.");
+  }
+}
+
+//4. Get Total Quantity of a Product
+
+const produDB = {
+  101: {
+      id: 101,
+      title: "Sony LED 40 inch",
+      variations: [
+          { color: "Black", size: "40 inch", quantity: 5 },
+          { color: "Silver", size: "42 inch", quantity: 3 }
+      ],
+      reviews: [
+          { user: "Alice", rating: 4, comment: "Great TV!" }
+      ]
+  },
+  102: {
+      id: 102,
+      title: "Mobile",
+      variations: [
+          { color: "Red", size: "6 inch", quantity: 7 },
+          { color: "Blue", size: "5.5 inch", quantity: 4 }
+      ],
+      reviews: [
+          { user: "Charlie", rating: 3, comment: "It's okay, could be better." }
+      ]
+  },
+  103: {
+      id: 103,
+      title: "Bike",
+      variations: [
+          { color: "Black", size: "Medium", quantity: 3 },
+          { color: "Red", size: "Large", quantity: 2 }
+      ],
+      reviews: [
+          { user: "Eva", rating: 5, comment: "Great bike for mountain trails." }
+      ]
+  }
+};
+
+
+function printTotalQuantity(productId) {
+  const product = productsDB[productId];
+  
+  if (product) {
+      const totalQuantity = product.variations.reduce((total, variation) => total + variation.quantity, 0);
+      console.log(`Total Quantity: ${totalQuantity}`);
+  } else {
+      console.log("Product not found.");
+  }
+}
+
+
+//5. Filter Products with Low Stock
+
+const prodDB = {
+  101: {
+      id: 101,
+      title: "Sony LED 40 inch",
+      variations: [
+          { color: "Black", size: "40 inch", quantity: 5 },
+          { color: "Silver", size: "42 inch", quantity: 3 }
+      ],
+      reviews: [
+          { user: "Alice", rating: 4, comment: "Great TV!" }
+      ]
+  },
+  102: {
+      id: 102,
+      title: "Mobile",
+      variations: [
+          { color: "Red", size: "6 inch", quantity: 1 },  
+          { color: "Blue", size: "5.5 inch", quantity: 4 }
+      ],
+      reviews: [
+          { user: "Charlie", rating: 3, comment: "It's okay, could be better." }
+      ]
+  },
+  103: {
+      id: 103,
+      title: "Bike",
+      variations: [
+          { color: "Black", size: "Medium", quantity: 0 }, 
+          { color: "Red", size: "Large", quantity: 2 }
+      ],
+      reviews: [
+          { user: "Eva", rating: 5, comment: "Great bike for mountain trails." }
+      ]
+  },
+  104: {
+      id: 104,
+      title: "Tablet",
+      variations: [
+          { color: "White", size: "10 inch", quantity: 10 },
+          { color: "Black", size: "9.7 inch", quantity: 8 }
+      ],
+      reviews: [
+          { user: "John", rating: 5, comment: "Perfect tablet!" }
+      ]
+  }
+};
+
+
+function printProductsWithLowStock() {
+  for (const productId in productId) {
+      const product = productsDB[productId];
+   
+      const lowStockVariation = product.variations.some(variation => variation.quantity < 2);
+      
+      if (lowStockVariation) {
+          console.log(product.title);
+      }
+  }
+}
+
+
+//6. Find the Highest Rated Product
+
+const proDB= {
+  101: {
+      id: 101,
+      title: "Sony LED 40 inch",
+      variations: [
+          { color: "Black", size: "40 inch" },
+          { color: "Silver", size: "42 inch" }
+      ],
+      reviews: [
+          { user: "Alice", rating: 4, comment: "Great TV!" },
+          { user: "Bob", rating: 5, comment: "Amazing picture quality." }
+      ]
+  },
+  102: {
+      id: 102,
+      title: "Mobile",
+      variations: [
+          { color: "Red", size: "6 inch" },
+          { color: "Blue", size: "5.5 inch" }
+      ],
+      reviews: [
+          { user: "Charlie", rating: 3, comment: "It's okay, could be better." },
+          { user: "David", rating: 4, comment: "Good value for money." }
+      ]
+  },
+  103: {
+      id: 103,
+      title: "Bike",
+      variations: [
+          { color: "Black", size: "Medium" },
+          { color: "Red", size: "Large" }
+      ],
+      reviews: [
+          { user: "Eva", rating: 5, comment: "Great bike for mountain trails." }
+      ]
+  }
+};
+
+function calculateAverageRating(reviews) {
+  const totalRating = reviews.reduce((total, review) => total + review.rating, 0);
+  return totalRating / reviews.length;
+}
+
+
+function printHighestRatedProduct() {
+  let highestRatedProduct = null;
+  let highestRating = 0;
+  
+  for (const productId in productId) {
+      const product = productsDB[productId];
+      const averageRating = calculateAverageRating(product.reviews);
+      
+   
+      if (averageRating > highestRating) {
+          highestRatedProduct = product;
+          highestRating = averageRating;
+      }
+  }
   
   if (highestRatedProduct) {
-    console.log(`Highest Rated Product: ${highestRatedProduct.title}`);
+      console.log(`Highest Rated Product: ${highestRatedProduct.title}`);
   } else {
-    console.log("No product reviews available.");
+      console.log("No products with ratings available.");
   }
+}
 
-  // 7. Filter Active Reviews for a Product
-  
-var products = {
-    102: {
-      id: 102,
-      title: "Mobile",
-      variations: [
-        { color: "black", size: "64GB", quantity: 5 },
-        { color: "blue", size: "128GB", quantity: 3 }
-      ],
-      reviews: [
-        { user: "Alice", rating: 5, status: true, comment: "Great product!" },
-        { user: "Bob", rating: 4, status: false, comment: "Good value for money." },
-        { user: "Ahmad", rating: 4.0, status: true, comment: "Very good product!" },
-        { user: "Ali", rating: 5.0, status: true, comment: "Highly recommended!" }
-      ]
-    },
-    103: {
-      id: 103,
-      title: "Laptop",
-      variations: [
-        { color: "gray", size: "15 inch", quantity: 4 },
-        { color: "black", size: "13 inch", quantity: 5 }
-      ],
-      reviews: [
-        { user: "Charlie", rating: 3, status: true, comment: "Decent laptop." },
-        { user: "David", rating: 5, status: false, comment: "Amazing performance!" }
-      ]
-    }
-  };
-  
- 
-  for (var productId in products) {
-    var product = products[productId];
-    var approvedReviews = product.reviews.filter(review => review.status === true);
-  
- 
-    approvedReviews.forEach(review => {
-      console.log(JSON.stringify({
-        user: review.user,
-        rating: review.rating,
-        comment: review.comment
-      }));
-    });
-  }
 
-  // 8. Find the Most Expensive Variation of Each Product
- 
-var products = {
-    101: {
+
+
+//7. Filter Active Reviews for a Product
+
+const prod= {
+  101: {
       id: 101,
       title: "Sony LED 40 inch",
       variations: [
-        { color: "black", size: "40 inch", price: 45000 },
-        { color: "silver", size: "40 inch", price: 55000 },
-        { color: "white", size: "40 inch", price: 50000 }
+          { color: "Black", size: "40 inch" },
+          { color: "Silver", size: "42 inch" }
+      ],
+      reviews: [
+          { user: "Ahmad", rating: 4.0, comment: "Great TV!", status: true },
+          { user: "Ali", rating: 5.0, comment: "Amazing picture quality.", status: true },
+          { user: "Sam", rating: 3.0, comment: "Good, but a little pricey.", status: false }
       ]
-    },
-    102: {
+  },
+  102: {
       id: 102,
       title: "Mobile",
       variations: [
-        { color: "black", size: "64GB", price: 40000 },
-        { color: "silver", size: "128GB", price: 55000 },
-        { color: "gold", size: "256GB", price: 48000 }
+          { color: "Red", size: "6 inch" },
+          { color: "Blue", size: "5.5 inch" }
+      ],
+      reviews: [
+          { user: "Charlie", rating: 3.0, comment: "It's okay, could be better.", status: false },
+          { user: "David", rating: 4.0, comment: "Good value for money.", status: true }
       ]
-    },
-    103: {
+  },
+  103: {
       id: 103,
       title: "Bike",
       variations: [
-        { color: "black", size: "medium", price: 45000 },
-        { color: "red", size: "large", price: 50000 },
-        { color: "blue", size: "small", price: 40000 },
-        { color: "black", size: "large", price: 55000 }
+          { color: "Black", size: "Medium" },
+          { color: "Red", size: "Large" }
+      ],
+      reviews: [
+          { user: "Eva", rating: 5.0, comment: "Great bike for mountain trails.", status: true }
       ]
-    }
-  };
-  
-
-  for (var productId in products) {
-    var product = products[productId];
-  
-    // Find the most expensive variation
-    var mostExpensiveVariation = product.variations.reduce((expensive, variation) => {
-      return variation.price > expensive.price ? variation : expensive;
-    });
-  
-
-    console.log(`Product ${product.id} = ${product.title} - ${mostExpensiveVariation.color} (${mostExpensiveVariation.price})`);
   }
+};
 
-  //9. Calculate Total Stock Value
 
-var products = {
-    101: {
+function printApprovedReviews(productId) {
+  const product = productId[productId];
+  
+  if (product) {
+      
+      const approvedReviews = product.reviews.filter(review => review.status === true);
+      
+      if (approvedReviews.length > 0) {
+          approvedReviews.forEach(review => {
+              console.log(JSON.stringify(review));
+          });
+      } else {
+          console.log("No approved reviews for this product.");
+      }
+  } else {
+      console.log("Product not found.");
+  }
+}
+
+
+
+
+//8. Find the Most Expensive Variation of Each Product
+
+
+const pro= {
+  101: {
       id: 101,
       title: "Sony LED 40 inch",
       variations: [
-        { color: "black", size: "40 inch", price: 45000, quantity: 5 },
-        { color: "silver", size: "40 inch", price: 55000, quantity: 3 },
-        { color: "white", size: "40 inch", price: 50000, quantity: 2 }
+          { color: "Black", size: "40 inch", price: 45000 },
+          { color: "Silver", size: "42 inch", price: 55000 },
+          { color: "Red", size: "50 inch", price: 50000 }
       ]
-    },
-    102: {
+  },
+  102: {
       id: 102,
       title: "Mobile",
       variations: [
-        { color: "black", size: "64GB", price: 40000, quantity: 10 },
-        { color: "silver", size: "128GB", price: 55000, quantity: 7 },
-        { color: "gold", size: "256GB", price: 48000, quantity: 12 }
+          { color: "Red", size: "6 inch", price: 30000 },
+          { color: "Blue", size: "5.5 inch", price: 25000 },
+          { color: "Silver", size: "6 inch", price: 55000 }
       ]
-    },
-    103: {
+  },
+  103: {
       id: 103,
       title: "Bike",
       variations: [
-        { color: "black", size: "medium", price: 45000, quantity: 6 },
-        { color: "red", size: "large", price: 50000, quantity: 4 },
-        { color: "blue", size: "small", price: 40000, quantity: 8 },
-        { color: "black", size: "large", price: 55000, quantity: 3 }
+          { color: "Black", size: "Medium", price: 55000 },
+          { color: "Red", size: "Large", price: 45000 }
       ]
-    }
-  };
-  
- 
-  var totalStockValue = 0;
-  
-  for (var productId in products) {
-    var product = products[productId];
-    
-  
-    product.variations.forEach(variation => {
-      totalStockValue += variation.price * variation.quantity;
-    });
   }
-  
-  // Output the total stock value
+};
+
+
+function printMostExpensiveVariation() {
+  for (const productId in productsDB) {
+      const product = productsDB[productId];
+      
+
+      const mostExpensiveVariation = product.variations.reduce((maxVariation, currentVariation) => {
+          return currentVariation.price > maxVariation.price ? currentVariation : maxVariation;
+      });
+
+      console.log(`Product ${productId} = ${product.title} - ${mostExpensiveVariation.color} (${mostExpensiveVariation.price})`);
+  }
+}
+//9. Calculate Total Stock Value
+
+const prDB = {
+  101: {
+      id: 101,
+      title: "Sony LED 40 inch",
+      variations: [
+          { color: "Black", size: "40 inch", price: 45000, quantity: 10 },
+          { color: "Silver", size: "42 inch", price: 55000, quantity: 8 },
+          { color: "Red", size: "50 inch", price: 50000, quantity: 6 }
+      ]
+  },
+  102: {
+      id: 102,
+      title: "Mobile",
+      variations: [
+          { color: "Red", size: "6 inch", price: 30000, quantity: 12 },
+          { color: "Blue", size: "5.5 inch", price: 25000, quantity: 15 },
+          { color: "Silver", size: "6 inch", price: 55000, quantity: 5 }
+      ]
+  },
+  103: {
+      id: 103,
+      title: "Bike",
+      variations: [
+          { color: "Black", size: "Medium", price: 55000, quantity: 7 },
+          { color: "Red", size: "Large", price: 45000, quantity: 10 }
+      ]
+  }
+};
+
+function printTotalStockValue() {
+  let totalStockValue = 0;
+
+  for (const productId in productsDB) {
+      const product = productsDB[productId];
+
+ 
+      const productValue = product.variations.reduce((total, variation) => {
+          return total + (variation.price * variation.quantity);
+      }, 0);
+
+ 
+      totalStockValue += productValue;
+  }
+
   console.log(`Total Stock Value: ${totalStockValue}`);
-  
+}
+
